@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { FaTrashAlt } from 'react-icons/fa'
 
 function App() {
 	const [toDos, setToDos] = useState([])
@@ -13,8 +14,10 @@ function App() {
 		e.preventDefault()
 		setToDos((toDos) => [...toDos, newToDo])
 		setNewToDo('')
+	}
 
-		// setSearches((searches) => [...searches, query])
+	const deleteTodo = (indx) => {
+		setToDos((todo) => todo.filter((to, i) => i !== indx))
 	}
 
 	return (
@@ -35,7 +38,12 @@ function App() {
 				<h2 className="text-lg">To do list</h2>
 				<ul>
 					{toDos.map((number, i) => (
-						<li key={i}>{number}</li>
+						<li className="flex items-center justify-between" key={i}>
+							{number}
+							<button onClick={() => deleteTodo(i)}>
+								<FaTrashAlt />
+							</button>
+						</li>
 					))}
 				</ul>
 			</main>
