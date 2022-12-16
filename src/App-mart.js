@@ -12,16 +12,16 @@ function App() {
 
 	const handleSubmit = (e) => {
 		e.preventDefault()
-		setToDos((toDos) => [...toDos, { newToDo, complete: false }])
-		// save to locastorage
+		setToDos((toDos) => [...toDos, { txt: newToDo, complete: false }])
 		setNewToDo('')
 	}
 
 	const deleteTodo = (indx) => {
 		setToDos((todo) => todo.filter((to, i) => i !== indx))
+		setToDos((toDos) => [toDos])
 	}
 
-	const handleCompleteToDo = (i) => {
+	const handleCompleteToDo = (task, i) => {
 		const updatedTodoList = toDos.map((todo, indx) => {
 			if (i === indx) {
 				return { ...todo, complete: true }
@@ -29,6 +29,7 @@ function App() {
 
 			return todo
 		})
+
 		setToDos(updatedTodoList)
 	}
 
@@ -58,10 +59,10 @@ function App() {
 							}
 							key={i}>
 							<div>
-								<button onClick={() => handleCompleteToDo((number, i))}>
+								<button onClick={() => handleCompleteToDo(number, i)}>
 									<FaCheck className="mr-2" />
 								</button>
-								<span className="text-xl">{number.newToDo}</span>
+								<span className="text-xl">{number.txt}</span>
 							</div>
 							<button onClick={() => deleteTodo(i)}>
 								<FaTrashAlt />
